@@ -26,3 +26,6 @@ yarn-error.log*
 .github/
 firebase.json
 public/404.html
+
+# Local Netlify folder
+.netlify

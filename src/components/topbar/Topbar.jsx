@@ -21,7 +21,7 @@ const Topbar = () => {
     const handleLogout = () => {
         dispatch({ type: "LOGOUT" });
         setAnchorEl(null);
-        window.location.replace("/login");
+        window.location.replace("/");
       };
     
     return (

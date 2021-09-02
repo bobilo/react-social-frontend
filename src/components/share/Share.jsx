@@ -22,14 +22,14 @@ export default function Share({ user }) {
             newPost.img = fileName;
         
             try {
-                await axios.post("/upload", data);
+                await axios.post("https://node-social-backend-1990.herokuapp.com/api/upload", data);
             } catch(err) {
                 console.log(err);
             }
         };
 
         try {
-            await axios.post("/posts", newPost);
+            await axios.post("https://node-social-backend-1990.herokuapp.com/api/posts", newPost);
             window.location.reload();
 
         } catch(err) {

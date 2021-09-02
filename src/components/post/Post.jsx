@@ -28,7 +28,7 @@ export default function Post({ post }) {
     
     useEffect(() => {
         const fetchUser = async () => {
-            const res = await axios.get(`/users?userId=${post.userId}`);
+            const res = await axios.get(`https://node-social-backend-1990.herokuapp.com/api/users?userId=${post.userId}`);
             setUser(res.data);
         };
         fetchUser();
@@ -36,7 +36,7 @@ export default function Post({ post }) {
 
     const likeHandler = async () => {
         try {
-            await axios.put("/posts/" + post._id + "/like", {userId: currentUser._id});
+            await axios.put("https://node-social-backend-1990.herokuapp.com/api/posts/" + post._id + "/like", {userId: currentUser._id});
 
         } catch(err) {
             console.log(err);
@@ -49,7 +49,7 @@ export default function Post({ post }) {
         e.preventDefault();
 
         try {
-            await axios.put("/posts/" + post._id + "/comment", {userId: currentUser._id, comment: comment.current.value });
+            await axios.put("https://node-social-backend-1990.herokuapp.com/api/posts/" + post._id + "/comment", {userId: currentUser._id, comment: comment.current.value });
 
         } catch(err) {
             console.log(err);
@@ -68,7 +68,7 @@ export default function Post({ post }) {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`/posts/${post._id}`, {
+            await axios.delete(`https://node-social-backend-1990.herokuapp.com/api/posts/${post._id}`, {
                 data: {userId: currentUser._id }
             });
             window.location.reload();

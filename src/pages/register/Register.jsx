@@ -22,7 +22,7 @@ export default function Register() {
                 password: password.current.value,
             };
             try {
-                await axios.post("/auth/register", user);
+                await axios.post("https://node-social-backend-1990.herokuapp.com/api/auth/register", user);
                 history.push("/login");
 
             } catch(err) {
