@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Add, Remove } from "@material-ui/icons";
+import EditIcon from '@material-ui/icons/Edit';
 
 export default function Rightbar({ user }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -81,7 +82,16 @@ export default function Rightbar({ user }) {
                     {followed ? <Remove /> : <Add /> }
                 </button>
             )}
-                <h4 className="rightbarTitle">User information</h4>
+                <div className="userInfoContainer">
+                    <h4 className="rightbarTitle">User information</h4>
+                    {
+                        (user._id === currentUser._id) ? (
+                            <label><EditIcon htmlColor="RoyalBlue" className="editButtonIcon" /></label>
+                        ) : (
+                            null
+                        )
+                    }
+                </div>
                 <div className="rightbarInfo">
                     <div className="rightbarInfoItem">
                         <span className="rightbarInfoKey">City:</span>

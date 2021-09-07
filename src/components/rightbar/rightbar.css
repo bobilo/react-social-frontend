@@ -28,6 +28,12 @@
     margin: 30px 0;
 }
 
+.userInfoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .rightbarTitle {
     margin-bottom: 20px;
 }
@@ -36,6 +42,11 @@
     font-size: 18px;
     font-weight: 500;
     margin-bottom: 10px;
+}
+
+.editButtonIcon {
+    cursor: pointer;
+    margin-right: 50px;
 }
 
 .rightbarInfo {
