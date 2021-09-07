@@ -17,6 +17,19 @@
     object-fit: cover;
 }
 
+.coverPhotoButton {
+    z-index: 1;
+    position: absolute;
+    float: right;
+    top: -50px;
+}
+
+.profilePhotoButton {
+    z-index: 1;
+    position: absolute;
+    right: -735px;
+}
+
 .profileUserImg {
     width: 150px;
     height: 150px;

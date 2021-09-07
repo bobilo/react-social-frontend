@@ -60,7 +60,7 @@ const Topbar = () => {
                         <span className="topbarIconBadge">1</span>
                     </div>
                 </div>
-                <Button aria-controls="simple-menu" aria-haspop="true" onClick={handleClick}>
+                <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                     <img src={
                         user.profilePicture 
                         ? PF + user.profilePicture 

@@ -13,7 +13,6 @@ export default function Post({ post }) {
     const [like, setLike] = useState(post.likes.length);
     const [comments, setComments] = useState(post.comments.length);
     const [isliked, setIsLiked] = useState(false);
-    const [commentUser, setCommentUser] = useState({});
     const [user, setUser] = useState({});
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const {user: currentUser } = useContext(AuthContext);
@@ -49,7 +48,7 @@ export default function Post({ post }) {
         e.preventDefault();
 
         try {
-            await axios.put("https://node-social-backend-1990.herokuapp.com/api/posts/" + post._id + "/comment", {userId: currentUser._id, comment: comment.current.value });
+            await axios.put("https://node-social-backend-1990.herokuapp.com/api/posts/" + post._id + "/comment", {username: currentUser.username, comment: comment.current.value });
 
         } catch(err) {
             console.log(err);
@@ -95,7 +94,7 @@ export default function Post({ post }) {
                         <span className="postDate">{format(post.createdAt)}</span>
                     </div>
                     <div className="postTopRight">
-                        <IconButton aria-controls="simple-menu" aria-haspop="true" onClick={handleClick}>
+                        <IconButton aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
                             <MoreVert className="movertIcon"/>
                         </IconButton>
                         <Menu 
@@ -142,19 +141,22 @@ export default function Post({ post }) {
                 {
                     postComments.map((c) => (
                         <div className="comments">
-                            <Link className="link" to={`profile/${user.username}`}>
+                            <Link className="link" to={`/profile/${Object.keys(c)}`}>
                                 <img className="postProfileImg" 
                                     src={user.profilePicture ? PF + user.profilePicture : PF+"person/noAvatar.png"} 
                                     alt="" 
                                 />
                             </Link>
-                            <span>{Object.values(c)}</span>
+                            <div className="commentText">
+                                <span className="commentUser">{Object.keys(c)}</span>
+                                <span className="commentValue">{Object.values(c)}</span>
+                            </div>
                         </div>
                         
                     ))
                 }
                 <div className="postComment">
-                    <Link className="link" to={`profile/${currentUser.username}`}>
+                    <Link className="link" to={`/profile/${currentUser.username}`}>
                         <img className="postProfileImg" 
                             src={currentUser.profilePicture ? PF + currentUser.profilePicture : PF+"person/noAvatar.png"} 
                             alt="" 

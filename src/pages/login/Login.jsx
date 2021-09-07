@@ -3,12 +3,11 @@ import "./login.css"
 import { loginCall } from "../../apiCalls";
 import { AuthContext } from "../../context/AuthContext";
 import { CircularProgress } from "@material-ui/core";
-import { Link } from "react-router-dom";
 
 export default function Login() {
     const email = useRef();
     const password = useRef();
-    const { user, isFetching, error, dispatch } = useContext(AuthContext);
+    const { isFetching, dispatch } = useContext(AuthContext);
 
     const handleLogin = (e) => {
         e.preventDefault();

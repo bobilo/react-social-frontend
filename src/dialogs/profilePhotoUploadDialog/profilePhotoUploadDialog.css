@@ -1,0 +1,38 @@
+.uploadHr {
+    margin: 20px;
+}
+
+.uploadImgContainer {
+    padding: 0 20px 10px 20px;
+    position: relative;
+}
+
+.uploadImg {
+    width: 100%;
+    object-fit: cover;
+}
+
+.uploadCancleImg {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.uploadOption {
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.uploadOptionicon {
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.uploadOptionText {
+    font-size: 14px;
+    font-weight: 500;
+}
