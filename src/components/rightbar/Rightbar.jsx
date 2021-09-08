@@ -8,12 +8,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Add, Remove } from "@material-ui/icons";
 import EditIcon from '@material-ui/icons/Edit';
+import EditProfileDialog from "../../dialogs/editProfileDialog/EditProfileDialog";
 
 export default function Rightbar({ user }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [friends, setFriends] = useState([]);
     const {user: currentUser, dispatch} = useContext(AuthContext);
     const [followed, setFollowed] = useState(currentUser.followings.includes(user?._id));
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         setFollowed(currentUser.followings.includes(user?._id));
@@ -52,6 +54,8 @@ export default function Rightbar({ user }) {
         setFollowed(!followed);
     };
 
+    const openEditProfileDialog = () => setOpen(true);
+
     const HomeRightbar = () => {
         return(
             <>
@@ -86,7 +90,7 @@ export default function Rightbar({ user }) {
                     <h4 className="rightbarTitle">User information</h4>
                     {
                         (user._id === currentUser._id) ? (
-                            <label><EditIcon htmlColor="RoyalBlue" className="editButtonIcon" /></label>
+                            <label><EditIcon htmlColor="RoyalBlue" className="editButtonIcon" onClick={openEditProfileDialog} /></label>
                         ) : (
                             null
                         )
@@ -121,7 +125,11 @@ export default function Rightbar({ user }) {
                         </Link>
                     ))}
                 </div>
-                
+                <EditProfileDialog
+                    open={open}
+                    user={user}
+                    handleClose={() => setOpen(false)}
+                />
             </>
         )
     }

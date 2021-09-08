@@ -1,0 +1,28 @@
+.editProfiledHr {
+    margin: 10px;
+}
+
+.loginRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loginInput {
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    font-size: 18px;
+    margin-left: 10px;
+    color: gray
+}
+
+.loginInput:focus {
+    outline: none;
+}
+
+.inputLabel {
+    font-size: 20px;
+    margin: 10px;
+}
+

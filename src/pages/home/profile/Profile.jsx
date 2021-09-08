@@ -40,7 +40,7 @@ export default function Profile() {
                 <div className="profileRight">
                     <div className="profileRightTop">
                         <div className="profileCover">
-                            <img className="profileCoverImg" src={user.coverPicture ? PF + user.coverPicture : PF + "person/noCover.png"} alt="" />
+                            <img className="profileCoverImg" src={user?.coverPicture ? PF + user.coverPicture : PF + "person/noCover.png"} alt="" />
                             {
                                 (user._id === currentUser._id) ? (
                                     <>
