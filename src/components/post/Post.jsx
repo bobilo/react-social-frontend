@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { Menu, MenuItem, IconButton } from "@material-ui/core";
 import { AuthContext } from '../../context/AuthContext';
+import Comments from '../comments/Comments';
 
 export default function Post({ post }) {
     const comment = useRef();
@@ -140,19 +141,10 @@ export default function Post({ post }) {
                 <hr className="postHr" />
                 {
                     postComments.map((c) => (
-                        <div className="comments">
-                            <Link className="link" to={`/profile/${Object.keys(c)}`}>
-                                <img className="postProfileImg" 
-                                    src={user.profilePicture ? PF + user.profilePicture : PF+"person/noAvatar.png"} 
-                                    alt="" 
-                                />
-                            </Link>
-                            <div className="commentText">
-                                <span className="commentUser">{Object.keys(c)}</span>
-                                <span className="commentValue">{Object.values(c)}</span>
-                            </div>
-                        </div>
-                        
+                        <Comments 
+                            userName={Object.keys(c)}
+                            comment={Object.values(c)}
+                        />
                     ))
                 }
                 <div className="postComment">
