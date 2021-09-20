@@ -8,6 +8,8 @@ import {
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import Profile from "./pages/home/profile/Profile";
+import ConfirmEmail from "./pages/resetpassword/ConfirmEmail";
+import ResetPassword from "./pages/resetpassword/ResetPassword";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 
@@ -29,6 +31,9 @@ function App() {
         </Route>
         <Route path="/profile/:username">
           {user ? <Profile /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/resetpasswod">
+        {user ? <ResetPassword /> : <ConfirmEmail /> }
         </Route>
       </Switch>
     </Router>

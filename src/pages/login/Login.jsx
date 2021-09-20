@@ -18,6 +18,10 @@ export default function Login() {
         dispatch);
     };
 
+    const resetPass = () => {
+        window.location.replace("/resetpasswod");
+    }
+
     const handleClick = () => {
         window.location.replace("/register");
     }
@@ -42,7 +46,7 @@ export default function Login() {
                                 "Log In"
                             )}
                         </button>
-                        <span className="loginForgot">Forgot Password?</span>
+                        <span className="loginForgot" onClick={resetPass}>Forgot Password?</span>
                         <button className="loginRegisterButton" onClick={handleClick}>
                             {isFetching ? (
                                 <CircularProgress color="white" size="20px" />

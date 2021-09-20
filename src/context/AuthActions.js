@@ -25,3 +25,17 @@ export const Unfollow = (userId) => ({
     type: "UNFOLLOW",
     payload: userId,
 });
+
+export const ConfirmUserStart = (userEmail) => ({
+    type: "CONFIRM_USER_START",
+});
+
+export const ConfirmUserSuccess = (user) => ({
+    type: "CONFIRM_USER_SUCCESS",
+    payload: user,
+});
+
+export const ConfirmUserFailure = (error) => ({
+    type: "CONFIRM_USER_FAILURE",
+    payload: error
+});
