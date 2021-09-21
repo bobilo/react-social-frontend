@@ -3,6 +3,7 @@ const AuthReducer = (state, action) => {
        case "LOGIN_START":
            return {
                user: null,
+               resetUser: null,
                isFetching: true,
                error: false,
            };
@@ -10,6 +11,7 @@ const AuthReducer = (state, action) => {
         case "LOGIN_SUCCESS":
             return {
                 user: action.payload,
+                resetUser: null,
                 isFetching: false,
                 error: false,
             };
@@ -17,19 +19,22 @@ const AuthReducer = (state, action) => {
         case "LOGIN_FAILURE":
             return {
                 user: null,
+                resetUser: null,
                 isFetching: false,
                 error: action.payload,
             };
         case "CONFIRM_USER_START":
             return {
                 user: null,
+                resetUser: null,
                 isFetching: true,
                 error: false,
             };
 
         case "CONFIRM_USER_SUCCESS":
             return {
-                user: action.payload,
+                user: null,
+                resetUser: action.payload,
                 isFetching: false,
                 error: false,
             };
@@ -37,12 +42,14 @@ const AuthReducer = (state, action) => {
         case "CONFIRM_USER_FAILURE":
             return {
                 user: null,
+                resetUser: null,
                 isFetching: false,
                 error: action.payload,
             };
         case "LOGOUT":
             return {
                 user: null,
+                resetUser: null,
                 isFetching: false,
                 error: false,
             };    

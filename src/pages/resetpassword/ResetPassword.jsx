@@ -5,16 +5,16 @@ import "./resetpassword.css";
 
 export default function ResetPassword() {
     const password = useRef();
-    const { user } = useContext(AuthContext);
+    const { resetUser } = useContext(AuthContext);
 
     const handlePasswordReset = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`https://node-social-backend-1990.herokuapp.com/api/users/${user._id}`, {
-                userId: user._id,
+            await axios.put(`https://node-social-backend-1990.herokuapp.com/api/users/${resetUser._id}`, {
+                userId: resetUser._id,
                 password: password.current.value
             });
-            localStorage.setItem("user", null);
+            localStorage.setItem("resetUser", null);
             window.location.replace("/login");
             
         } catch(err) {

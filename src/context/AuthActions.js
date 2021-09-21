@@ -30,9 +30,9 @@ export const ConfirmUserStart = (userEmail) => ({
     type: "CONFIRM_USER_START",
 });
 
-export const ConfirmUserSuccess = (user) => ({
+export const ConfirmUserSuccess = (resetUser) => ({
     type: "CONFIRM_USER_SUCCESS",
-    payload: user,
+    payload: resetUser,
 });
 
 export const ConfirmUserFailure = (error) => ({

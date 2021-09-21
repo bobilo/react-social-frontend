@@ -15,7 +15,7 @@ import { AuthContext } from "./context/AuthContext";
 
 function App() {
 
-  const {user} = useContext(AuthContext);
+  const { user, resetUser } = useContext(AuthContext);
 
   return (
     <Router>
@@ -33,7 +33,7 @@ function App() {
           {user ? <Profile /> : <Redirect to="/" />}
         </Route>
         <Route path="/resetpasswod">
-        {user ? <ResetPassword /> : <ConfirmEmail /> }
+          {resetUser ? <ResetPassword /> : <ConfirmEmail /> }
         </Route>
       </Switch>
     </Router>
