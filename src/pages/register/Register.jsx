@@ -6,6 +6,7 @@ import "./register.css"
 export default function Register() {
     const username = useRef();
     const email = useRef();
+    const dob  = useRef();
     const password = useRef();
     const confirmPassword = useRef();
     const history = useHistory();
@@ -16,9 +17,11 @@ export default function Register() {
             confirmPassword.current.setCustomValidity("Passwords don't match!");
 
         } else {
+            console.log(dob.current.value);
             const user = {
                 username: username.current.value,
                 email: email.current.value,
+                dob: dob.current.value,
                 password: password.current.value,
             };
             try {
@@ -36,21 +39,26 @@ export default function Register() {
     }
 
     return (
-        <div className="login">
-            <div className="loginWrapper">
-                <div className="loginLeft">
-                    <h3 className="loginLogo">Bonfacesocial</h3>
-                    <span className="loginDesc">
+        <div className="register">
+            <div className="registerWrapper">
+                <div className="registerLeft">
+                    <h3 className="registerLogo">Bonfacesocial</h3>
+                    <span className="registerDesc">
                         Connect with friends and the world around you on Bonfacesocial.
                     </span>
                 </div>
-                <div className="loginRight">
-                    <form className="loginBox" onSubmit={handleRegister}>
-                        <input ref={username} placeholder="Username" required className="loginInput" />
-                        <input ref={email} placeholder="Email" required className="loginInput" type="email" />
-                        <input ref={password} placeholder="Password" required className="loginInput" type="password" />
-                        <input ref={confirmPassword} placeholder="Confirm Password" required className="loginInput" type="password" />
-                        <button className="loginButton" type="submit">Sign Up</button>
+                <div className="registerRight">
+                    <form className="registerBox" onSubmit={handleRegister}>
+                        <input ref={username} placeholder="Username" required className="registerInput" />
+                        <input ref={email} placeholder="Email" required className="registerInput" type="email" />
+                        <input ref={dob} required className="registerInput" type="text" 
+                            onFocus={(e) => (e.currentTarget.type = "date")}
+                            onBlur={(e) => (e.currentTarget.type = "text")}
+                            placeholder="Date of Birth" 
+                        />
+                        <input ref={password} placeholder="Password" required className="registerInput" type="password" />
+                        <input ref={confirmPassword} placeholder="Confirm Password" required className="registerInput" type="password" />
+                        <button className="registerButton" type="submit">Sign Up</button>
                         <button className="loginRegisterButton" onClick={handleClick}>Login into Account</button>
                     </form>
                 </div>

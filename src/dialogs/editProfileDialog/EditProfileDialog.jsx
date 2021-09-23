@@ -7,6 +7,7 @@ export default function EditProfileDialog({ open, user, handleClose}) {
     const desc = useRef();
     const city = useRef();
     const from = useRef();
+    const dob = useRef();
     const relationship = useRef();
 
     const handleSubmit = async (e) => {
@@ -19,6 +20,7 @@ export default function EditProfileDialog({ open, user, handleClose}) {
                     desc: desc.current.value,
                     city: city.current.value,
                     from: from.current.value,
+                    dob: dob.current.value,
                     relationship: relationship.current.value
                 });
             window.location.reload();
@@ -47,6 +49,9 @@ export default function EditProfileDialog({ open, user, handleClose}) {
                         <input ref={city} defaultValue={user.city} className="loginInput" />
                         <label className="inputLabel">From:</label>
                         <input ref={from} defaultValue={user.from} className="loginInput" />
+                        <label className="inputLabel">Date of Birth:</label>
+                        <input type="date" ref={dob} defaultValue={user.dob} className="loginInput" />
+                        {/* <ReactDatePicker className="loginInput" defaultValue={user.dob} selected={dob} onChange={dob => setDate(dob)} /> */}
                         <label className="inputLabel">Relationship:</label>
                         <select ref={relationship} placeholder=
                         {

@@ -78,6 +78,7 @@ export default function Rightbar({ user }) {
     }
 
     const ProfileRightbar = () => {
+        const dob = user.dob;
         return(
             <>
             {user.username !== currentUser.username && (
@@ -104,6 +105,17 @@ export default function Rightbar({ user }) {
                     <div className="rightbarInfoItem">
                         <span className="rightbarInfoKey">From:</span>
                         <span className="rightbarInfoValue">{user.from}</span>
+                    </div>
+                    <div className="rightbarInfoItem">
+                        <span className="rightbarInfoKey">Date of Birth:</span>
+                        <span className="rightbarInfoValue">
+                            {
+                                dob ? (new Date(dob).toDateString()
+                                ) : (
+                                    null
+                                )
+                            }
+                        </span>
                     </div>
                     <div className="rightbarInfoItem">
                         <span className="rightbarInfoKey">Relationship:</span>
