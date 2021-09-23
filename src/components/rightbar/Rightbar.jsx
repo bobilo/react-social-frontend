@@ -13,6 +13,7 @@ import EditProfileDialog from "../../dialogs/editProfileDialog/EditProfileDialog
 export default function Rightbar({ user }) {
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const [friends, setFriends] = useState([]);
+    const [birthdayFriends, setBirthdayFriends] = useState([]);
     const {user: currentUser, dispatch} = useContext(AuthContext);
     const [followed, setFollowed] = useState(currentUser.followings.includes(user?._id));
     const [open, setOpen] = useState(false);
@@ -33,6 +34,19 @@ export default function Rightbar({ user }) {
         };
         getFriends();
     }, [user]);
+
+    useEffect(() => {
+        const getBirthdayFriends = async () => {
+            try {
+                const birthdayFriendList = await axios.get("https://node-social-backend-1990.herokuapp.com/api/users/birthdayfriends/" + currentUser._id);
+                setBirthdayFriends(birthdayFriendList.data);
+
+            } catch(err) {
+                console.log(err);
+            }
+        };
+        getBirthdayFriends();
+    }, [currentUser]);
 
     const handleFollow = async() => {
         try {
@@ -57,15 +71,34 @@ export default function Rightbar({ user }) {
     const openEditProfileDialog = () => setOpen(true);
 
     const HomeRightbar = () => {
+        const today = new Date();
+        const dd = today.getDate();
+        const mm = today.getMonth() + 1;
+        const birthdayFriendList = [];
+
+        if (birthdayFriends.length > 0 ){
+            birthdayFriends.map(friend => {
+                if ((new Date(friend.dob).getDate() === dd) && (new Date(friend.dob).getMonth() + 1 === mm)) {
+                    birthdayFriendList.push(friend);
+                }
+                return birthdayFriendList;
+            })
+        }
+            
         return(
             <>
-             <div className="birthdayContainer">
-                   <img className="birthdayImg" src="/assets/gift.png" alt="" />
-                   <span className="birthdayText">
-                       {" "}
-                       <b>John</b> and <b>3 other friends</b> have a birthday today
-                    </span>
-               </div>
+                {
+                    (birthdayFriendList.length > 0) ? (
+                        <div className="birthdayContainer">
+                            <img className="birthdayImg" src="/assets/gift.png" alt="" />
+                            <span className="birthdayText">
+                                <p><b>{birthdayFriendList[0].username}</b> and <b>{birthdayFriendList.length - 1} other friends</b> have a birthday today</p>
+                            </span>
+                         </div>
+                    ) : (
+                        null
+                    )
+                }          
                <img src="/assets/ad.png" alt="" className="rightbarAd" />
                <h4 className="rightbarTitle">Online Friends</h4>
                <ul className="rightbarFriendlist">
