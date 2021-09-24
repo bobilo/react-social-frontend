@@ -20,6 +20,46 @@
 .birthdayText {
     font-weight: 200;
     font-size: 15px;
+    cursor: pointer;
+}
+
+.birthdayHr {
+    margin-top: 5px;
+}
+
+.birthdays {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.userProfileImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.birthdayUser {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    text-align: left;
+    border-radius: 5px;
+    /* text-shadow: 0px 0px 2px #A09E9D;
+    color: #0A0A0A; */
+    background: #F4F4F4;
+}
+
+.username {
+    margin: 5px 0 0 10px;
+}
+
+.dob {
+    margin: 5px 0 5px 10px;
 }
 
 .rightbarAd {

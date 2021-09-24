@@ -17,6 +17,7 @@ export default function Rightbar({ user }) {
     const {user: currentUser, dispatch} = useContext(AuthContext);
     const [followed, setFollowed] = useState(currentUser.followings.includes(user?._id));
     const [open, setOpen] = useState(false);
+    const [showBirthdayFriends, setShowBirthdayFriends] = useState(false);
 
     useEffect(() => {
         setFollowed(currentUser.followings.includes(user?._id));
@@ -47,6 +48,10 @@ export default function Rightbar({ user }) {
         };
         getBirthdayFriends();
     }, [currentUser]);
+
+    const toggleBirthdayFriends = () => {
+        setShowBirthdayFriends(true);
+    }
 
     const handleFollow = async() => {
         try {
@@ -89,16 +94,54 @@ export default function Rightbar({ user }) {
             <>
                 {
                     (birthdayFriendList.length > 0) ? (
-                        <div className="birthdayContainer">
-                            <img className="birthdayImg" src="/assets/gift.png" alt="" />
-                            <span className="birthdayText">
-                                <p><b>{birthdayFriendList[0].username}</b> and <b>{birthdayFriendList.length - 1} other friends</b> have a birthday today</p>
-                            </span>
-                         </div>
+                        <div>
+                            {
+                                !showBirthdayFriends ? 
+                                    <div className="birthdayContainer">
+                                        <img className="birthdayImg" src="/assets/gift.png" alt="" />
+                                        {
+                                            birthdayFriendList.length > 1 ?
+                                                <span className="birthdayText" onClick={toggleBirthdayFriends}>
+                                                    <p><b>{birthdayFriendList[0].username}</b> and <b>{birthdayFriendList.length - 1} other friend(s)</b> have a birthday today</p>
+                                                </span>
+                                            :
+                                                <span className="birthdayText" onClick={toggleBirthdayFriends}>
+                                                    <p><b>{birthdayFriendList[0].username}</b> have a birthday today</p>
+                                                </span>
+                                        }    
+                                    </div>
+                                :
+                                    <div>
+                                        <h4 className="rightbarTitle">Today Birthdays</h4>
+                                        <hr className="birthdayHr" />
+                                        {
+                                            birthdayFriendList.map((f) => (
+                                                <div>
+                                                    <div className="birthdays">
+                                                        <Link className="link" to={`/profile/${f.username}`}>
+                                                            <img className="userProfileImg" 
+                                                                src={f.profilePicture ? PF + f.profilePicture : PF+"person/noAvatar.png"} 
+                                                                alt="" 
+                                                            />
+                                                        </Link>
+                                                        <div className="birthdayUser">
+                                                            <span className="username">{f.username}</span>
+                                                            <span className="dob">{new Date(f.dob).toDateString()}.  {Math.floor((new Date() - new Date(f.dob).getTime()) / 3.15576e+10)} years old</span>
+                                                        </div>
+                                                    </div>
+                                                    <hr className="birthdayHr" />
+                                                </div>  
+                                            ))
+                                        
+                                        }
+                                    </div>     
+                            }
+                        </div>
                     ) : (
                         null
                     )
-                }          
+                }
+                        
                <img src="/assets/ad.png" alt="" className="rightbarAd" />
                <h4 className="rightbarTitle">Online Friends</h4>
                <ul className="rightbarFriendlist">
