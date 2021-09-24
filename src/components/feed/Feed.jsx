@@ -23,6 +23,22 @@ export default function Feed({username}) {
         fetchPosts();
     },[username, user._id])
 
+    useEffect(() => {
+        const setUserOnline = async () => {
+            try {
+                await axios.put("https://node-social-backend-1990.herokuapp.com/api/users/" + user._id,
+                    {
+                        userId: user._id,
+                        isOnline: true,
+                    });
+    
+            } catch(err) {
+                console.log(err)
+            }
+        };
+        setUserOnline()
+    }, [user])
+
     return (
         <div className="feed">
             <div className="feedWrapper">

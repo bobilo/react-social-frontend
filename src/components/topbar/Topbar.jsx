@@ -2,6 +2,7 @@ import "./topbar.css"
 import { Search, Person, Chat, Notifications } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
+import axios from "axios";
 import { Menu, MenuItem, Button } from "@material-ui/core";
 import { AuthContext } from "../../context/AuthContext";
 
@@ -18,7 +19,18 @@ const Topbar = () => {
         setAnchorEl(null);
     }
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        try {
+            await axios.put("https://node-social-backend-1990.herokuapp.com/api/users/" + user._id,
+                {
+                    userId: user._id,
+                    isOnline: false,
+                });
+
+        } catch(err) {
+            console.log(err)
+        }
+        
         dispatch({ type: "LOGOUT" });
         setAnchorEl(null);
         window.location.replace("/");
