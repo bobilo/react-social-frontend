@@ -1,6 +1,6 @@
 import axios from 'axios';
 import './post.css';
-import { MoreVert, Send } from '@material-ui/icons';
+import { MoreVert, Send, PlayArrow } from '@material-ui/icons';
 import { useState, useEffect, useRef } from 'react';
 import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
@@ -83,15 +83,36 @@ export default function Post({ post }) {
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <Link className="link" to={`profile/${user.username}`}>
+                        <Link className="link" to={`/profile/${user.username}`}>
                             <img className="postProfileImg" 
                                 src={user.profilePicture ? PF + user.profilePicture : PF+"person/noAvatar.png"} 
                                 alt="" 
                             />
                         </Link>
-                        <span className="postUserName">
-                            {user.username}
-                        </span>
+                        {
+                            (!post.friendUserId) ? (
+                                <Link className="link" to={`/profile/${user.username}`}>
+                                <span className="postUserName">
+                                    {user.username}
+                                </span>
+                                </Link>
+                            ) : (
+                                <>
+                                <Link className="link" to={`/profile/${user.username}`}>
+                                    <span className="postUserName">
+                                        {user.username} 
+                                    </span>
+                                </Link>
+                                <PlayArrow />
+                                <Link className="link" to={`/profile/${post.friendUserName}`}>
+                                    <span className="postUserName">
+                                        {post.friendUserName}
+                                    </span>
+                                </Link>
+                                </>
+                            )
+                        }
+                        
                         <span className="postDate">{format(post.createdAt)}</span>
                     </div>
                     <div className="postTopRight">

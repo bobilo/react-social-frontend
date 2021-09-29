@@ -19,6 +19,7 @@ export default function Rightbar({ user }) {
     const [showBirthdayFriends, setShowBirthdayFriends] = useState(false);
     const birthdayMsg = useRef();
     const birthdayUserId = useRef();
+    const birthdayUserName = useRef();
 
     useEffect(() => {
         setFollowed(currentUser.followings.includes(user?._id));
@@ -76,10 +77,10 @@ export default function Rightbar({ user }) {
 
     const handleBirthdayPost = async(e) => {
         e.preventDefault();
-        console.log();
         const newBirthday = {
             userId: currentUser._id,
             friendUserId: birthdayUserId.current.value,
+            friendUserName: birthdayUserName.current.value,
             desc: birthdayMsg.current.value,
         }
         try {
@@ -151,11 +152,13 @@ export default function Rightbar({ user }) {
                                                                         <>
                                                                             <input className="postBirthdayInput" placeholder="Post on his timeline" ref={birthdayMsg} />
                                                                             <input className="postBirthdayInput" value={f._id} hidden ref={birthdayUserId} />
+                                                                            <input className="postBirthdayInput" value={f.username} hidden ref={birthdayUserName} />
                                                                         </>
                                                                     ) : (
                                                                         <>
                                                                             <input className="postBirthdayInput" placeholder="Post on her timeline" ref={birthdayMsg} />
                                                                             <input className="postBirthdayInput" value={f._id} hidden ref={birthdayUserId} />
+                                                                            <input className="postBirthdayInput" value={f.username} hidden ref={birthdayUserName} />
                                                                         </>
                                                                     )
                                                                 }
