@@ -15,6 +15,7 @@ export default function Feed({username}) {
             const res = username 
                 ? await axios.get("https://node-social-backend-1990.herokuapp.com/api/posts/profile/" + username) 
                 : await axios.get("https://node-social-backend-1990.herokuapp.com/api/posts/timeline/" + user._id);
+                console.log(res.data);
             setPosts(
                 res.data.sort((p1, p2) => {
                     return new Date(p2.createdAt) - new Date(p1.createdAt);

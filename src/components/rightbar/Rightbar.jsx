@@ -1,6 +1,6 @@
 import "./rightbar.css";
 import Online from "../online/Online";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
@@ -17,6 +17,8 @@ export default function Rightbar({ user }) {
     const [followed, setFollowed] = useState(currentUser.followings.includes(user?._id));
     const [open, setOpen] = useState(false);
     const [showBirthdayFriends, setShowBirthdayFriends] = useState(false);
+    const birthdayMsg = useRef();
+    const birthdayUserId = useRef();
 
     useEffect(() => {
         setFollowed(currentUser.followings.includes(user?._id));
@@ -72,6 +74,23 @@ export default function Rightbar({ user }) {
         setFollowed(!followed);
     };
 
+    const handleBirthdayPost = async(e) => {
+        e.preventDefault();
+        console.log();
+        const newBirthday = {
+            userId: currentUser._id,
+            friendUserId: birthdayUserId.current.value,
+            desc: birthdayMsg.current.value,
+        }
+        try {
+            await axios.post("https://node-social-backend-1990.herokuapp.com/api/posts/timeline", newBirthday);
+            window.location.reload();
+
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
     const openEditProfileDialog = () => setOpen(true);
 
     const HomeRightbar = () => {
@@ -126,6 +145,22 @@ export default function Rightbar({ user }) {
                                                         <div className="birthdayUser">
                                                             <span className="username">{f.username}</span>
                                                             <span className="dob">{new Date(f.dob).toDateString()}.  {Math.floor((new Date() - new Date(f.dob).getTime()) / 3.15576e+10)} years old</span>
+                                                            <div>
+                                                                {
+                                                                    (f.gender === "Male") ? (
+                                                                        <>
+                                                                            <input className="postBirthdayInput" placeholder="Post on his timeline" ref={birthdayMsg} />
+                                                                            <input className="postBirthdayInput" value={f._id} hidden ref={birthdayUserId} />
+                                                                        </>
+                                                                    ) : (
+                                                                        <>
+                                                                            <input className="postBirthdayInput" placeholder="Post on her timeline" ref={birthdayMsg} />
+                                                                            <input className="postBirthdayInput" value={f._id} hidden ref={birthdayUserId} />
+                                                                        </>
+                                                                    )
+                                                                }
+                                                                <button className="birthdayPostButton" onClick={handleBirthdayPost}>POST</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <hr className="birthdayHr" />
@@ -180,6 +215,10 @@ export default function Rightbar({ user }) {
                     <div className="rightbarInfoItem">
                         <span className="rightbarInfoKey">From:</span>
                         <span className="rightbarInfoValue">{user.from}</span>
+                    </div>
+                    <div className="rightbarInfoItem">
+                        <span className="rightbarInfoKey">Gender:</span>
+                        <span className="rightbarInfoValue">{user.gender}</span>
                     </div>
                     <div className="rightbarInfoItem">
                         <span className="rightbarInfoKey">Date of Birth:</span>

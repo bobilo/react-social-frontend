@@ -7,6 +7,7 @@ export default function Register() {
     const username = useRef();
     const email = useRef();
     const dob  = useRef();
+    const gender = useRef();
     const password = useRef();
     const confirmPassword = useRef();
     const history = useHistory();
@@ -22,6 +23,7 @@ export default function Register() {
                 username: username.current.value,
                 email: email.current.value,
                 dob: dob.current.value,
+                gender: gender.current.value,
                 password: password.current.value,
             };
             try {
@@ -56,6 +58,10 @@ export default function Register() {
                             onBlur={(e) => (e.currentTarget.type = "text")}
                             placeholder="Date of Birth" 
                         />
+                        <select placeholder="Gender" className="registerInput" ref={gender} >
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
                         <input ref={password} placeholder="Password" required className="registerInput" type="password" />
                         <input ref={confirmPassword} placeholder="Confirm Password" required className="registerInput" type="password" />
                         <button className="registerButton" type="submit">Sign Up</button>

@@ -22,7 +22,29 @@
     font-size: 15px;
     cursor: pointer;
 }
+.postBirthdayInput {
+    border: none;
+    background: #F4F4F4;
+    border-bottom: 1px solid gray;
+    width: 70%;
+    height: 25px;
+    margin: 5px 0 3px 10px;
+}
 
+.postBirthdayInput:focus{
+    outline: none;
+}
+.birthdayPostButton {
+    border-radius: 5px;
+    background-color: #778899;
+    margin-bottom: 0;
+    margin-left: 20px;
+    border: 1px solid gray;
+    width: 50px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+}
 .birthdayHr {
     margin-top: 5px;
 }
