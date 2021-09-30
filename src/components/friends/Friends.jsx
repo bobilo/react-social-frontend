@@ -42,7 +42,7 @@ export default function Friends({ user }) {
                             <li className="sidebarFriend">
                                 <img src={PF+user.profilePicture} alt="" className="sidebarFriendImg" />
                                 <span className="sidebarFriendName">{user.username}</span>
-                                <button className="rightbarFollowButton" onClick={handleFollow}>
+                                <button className="sidebarFollowButton" onClick={handleFollow}>
                                     {followed ? "Unfollow" : "Follow" }
                                     {followed ? <Remove /> : <Add /> }
                                 </button>
