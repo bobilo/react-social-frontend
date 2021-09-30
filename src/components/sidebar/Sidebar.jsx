@@ -5,15 +5,30 @@ import {
   PlayCircleFilledOutlined,
   Group,
   Bookmark,
-  HelpOutline,
   WorkOutline,
   Event,
   School,
 } from "@material-ui/icons";
-import { Users } from "../../dummyData";
 import Friends from "../friends/Friends";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Sidebar() {
+  const [users, setUsers] = useState([]);
+ 
+  useEffect(() => {
+    const fetchUsers = async() => {
+      try {
+        const res = await axios.get("https://node-social-backend-1990.herokuapp.com/api/users/all");
+        setUsers(res.data);
+
+      } catch(err) {
+        console.log(err);
+      }
+    };
+    fetchUsers();
+  })
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -23,7 +38,7 @@ export default function Sidebar() {
             <span className="sidebarListItemText">Feed</span>
           </li>
           <li className="sidebarListItem">
-            <Chat className="sidebarIcon" />
+            <Chat className="sidebarIcon" />Users
             <span className="sidebarListItemText">Chats</span>
           </li>
           <li className="sidebarListItem">
@@ -36,10 +51,7 @@ export default function Sidebar() {
           </li>
           <li className="sidebarListItem">
             <Bookmark className="sidebarIcon" />
-            <span className="sidebarListItemText">Bookmarks</span>
-          </li>
-          <li className="sidebarListItem">
-            <HelpOutline className="sidebarIcon" />
+            <span className="sidebarListItemText">Bookmarks</span>Users
             <span className="sidebarListItemText">Questions</span>
           </li>
           <li className="sidebarListItem">
@@ -57,8 +69,9 @@ export default function Sidebar() {
         </ul>
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
+        <h4 className="sidebarTitle">People you may know</h4>
         <ul className="sidebarFriendList">
-          {Users.map((u) => (
+          {users.map((u) => (
             <Friends key={u.id} user={u} />
           ))}
         </ul>
