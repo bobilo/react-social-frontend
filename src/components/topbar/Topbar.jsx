@@ -33,7 +33,6 @@ const Topbar = () => {
         
         dispatch({ type: "LOGOUT" });
         setAnchorEl(null);
-        window.location.replace("/");
       };
     
     return (
