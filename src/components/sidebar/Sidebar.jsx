@@ -9,7 +9,8 @@ import {
   Event,
   School,
 } from "@material-ui/icons";
-import Friends from "../friends/Friends";
+import FriendsSuggestions from "../friendsuggestions/FriendsSuggestions";
+import FriendRequests from "../friendrequests/FriendRequests";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -69,10 +70,16 @@ export default function Sidebar() {
         </ul>
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
+        <h4 className="sidebarTitle">Friend Requests</h4>
+        <ul className="sidebarFriendList">
+          {users.map((u) => (
+            <FriendRequests key={u.id} user={u} />
+          ))}
+        </ul>
         <h4 className="sidebarTitle">People you may know</h4>
         <ul className="sidebarFriendList">
           {users.map((u) => (
-            <Friends key={u.id} user={u} />
+            <FriendsSuggestions key={u.id} user={u} />
           ))}
         </ul>
       </div>

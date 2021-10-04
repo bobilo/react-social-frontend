@@ -1,10 +1,10 @@
-import "./friends.css";
+import "./friendrequests.css";
 import { Add, Remove } from "@material-ui/icons";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useContext, useState } from "react";
 
-export default function Friends({ user }) {
+export default function FriendRequests({ user }) {
     const {user: currentUser, dispatch} = useContext(AuthContext);
     const [followed, setFollowed] = useState(currentUser.followings.includes(user?._id));
 
@@ -36,9 +36,7 @@ export default function Friends({ user }) {
                 (user._id !== currentUser._id) ? (
                     <div>
                         {
-                          (user.followers.includes(currentUser._id) || user.followings.includes(currentUser._id)) ? (
-                            null
-                          ) : (
+                          (currentUser.followers.includes(user._id) && !currentUser.followings.includes(user._id)) ? (
                             <li className="sidebarFriend">
                                 <img src={PF+user.profilePicture} alt="" className="sidebarFriendImg" />
                                 <span className="sidebarFriendName">{user.username}</span>
@@ -47,6 +45,8 @@ export default function Friends({ user }) {
                                     {followed ? <Remove /> : <Add /> }
                                 </button>
                             </li>
+                          ) : (
+                            null
                           ) 
                         }  
                     </div>

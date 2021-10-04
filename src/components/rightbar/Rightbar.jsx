@@ -73,6 +73,7 @@ export default function Rightbar({ user }) {
             console.log(err);
         }
         setFollowed(!followed);
+        window.location.reload();
     };
 
     const handleBirthdayPost = async(e) => {
@@ -102,7 +103,7 @@ export default function Rightbar({ user }) {
 
         if (birthdayFriends.length > 0 ){
             birthdayFriends.map(friend => {
-                if ((new Date(friend.dob).getDate() === dd) && (new Date(friend.dob).getMonth() + 1 === mm)) {
+                if ((new Date(friend.dob).getDate() === dd) && (new Date(friend.dob).getMonth() + 1 === mm) && (friend.followers.includes(currentUser._id))) {
                     birthdayFriendList.push(friend);
                 }
                 return birthdayFriendList;
