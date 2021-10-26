@@ -247,12 +247,20 @@ export default function Rightbar({ user }) {
                 <h4 className="rightbarTitle">User friends</h4>
                 <div className="rightbarFollowings">
                     {friends.map((friend) => (
-                        <Link className="link" to={"/profile/"+friend.username}>
-                            <div className="rightbarFollowing">
-                                <img src={friend.profilePicture ? PF+friend.profilePicture : PF+"person/noAvatar.png"} alt="" className="rightbarFollowingImg" />
-                                <span className="rightbarFollowingName">{friend.username}</span>
-                            </div>
-                        </Link>
+                        <div>
+                            {
+                                (friend.followers.includes(user._id) && friend.followings.includes(user._id)) ? (
+                                    <Link className="link" to={"/profile/"+friend.username}>
+                                        <div className="rightbarFollowing">
+                                            <img src={friend.profilePicture ? PF+friend.profilePicture : PF+"person/noAvatar.png"} alt="" className="rightbarFollowingImg" />
+                                            <span className="rightbarFollowingName">{friend.username}</span>
+                                        </div>
+                                    </Link>
+                                ) : (
+                                    null
+                                )
+                            }
+                        </div>
                     ))}
                 </div>
                 <EditProfileDialog

@@ -13,6 +13,7 @@ import FriendsSuggestions from "../friendsuggestions/FriendsSuggestions";
 import FriendRequests from "../friendrequests/FriendRequests";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [users, setUsers] = useState([]);
@@ -38,10 +39,12 @@ export default function Sidebar() {
             <RssFeed className="sidebarIcon" />
             <span className="sidebarListItemText">Feed</span>
           </li>
-          <li className="sidebarListItem">
-            <Chat className="sidebarIcon" />Users
-            <span className="sidebarListItemText">Chats</span>
-          </li>
+          <Link className="link" to="/messenger">
+            <li className="sidebarListItem">
+              <Chat className="sidebarIcon" />Users
+              <span className="sidebarListItemText">Chats</span>
+            </li>
+          </Link>
           <li className="sidebarListItem">
             <PlayCircleFilledOutlined className="sidebarIcon" />
             <span className="sidebarListItemText">Videos</span>

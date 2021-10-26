@@ -12,6 +12,7 @@ import ConfirmEmail from "./pages/resetpassword/ConfirmEmail";
 import ResetPassword from "./pages/resetpassword/ResetPassword";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import Messenger from "./pages/messenger/Messenger";
 
 function App() {
 
@@ -28,6 +29,9 @@ function App() {
         </Route>
         <Route path="/register">
           {user ? <Redirect to="/" /> : <Register />}
+        </Route>
+        <Route path="/messenger">
+          {!user ? <Redirect to="/" /> : <Messenger />}
         </Route>
         <Route path="/profile/:username">
           {user ? <Profile /> : <Redirect to="/" />}
